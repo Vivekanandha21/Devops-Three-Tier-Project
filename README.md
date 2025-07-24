@@ -1,6 +1,6 @@
 # Advanced DevSecOps Pipeline with Kubernetes, AWS, and GitOps
 
-![Three-Tier Architecture](https://raw.githubusercontent.com/Bazith1/Three-Tier-Project/main/Three-Tier---yellow.gif "Three-Tier Architecture Demo")
+![Three-Tier Architecture]
 
 
 ## Project Introduction
@@ -63,12 +63,5 @@ Implement monitoring for the EKS cluster using:
 - Helm
 - Prometheus
 - Grafana
-
-
-## Contributions
-Contributions are welcome! Please fork the repository and submit a pull request.
-
-## License
-This project is licensed under the MIT License.
 
 Happy DevSecOps-ing! 🚀
