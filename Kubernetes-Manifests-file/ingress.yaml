@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mainlb
+  namespace: three-tier
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing  # Ensure ALB is internal
+    alb.ingress.kubernetes.io/target-type: ip  # Use IP target type
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'  # Listen on port 80
+    alb.ingress.kubernetes.io/load-balancer-attributes: "access_logs.s3.enabled=false"  # Disable access logs for simplicity
+spec:
+  ingressClassName: alb  # Use ALB ingress controller
+  rules:
+    - host: ""  # Allow access through the internal ELB DNS
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: api
+                port:
+                  number: 3500
+          - path: /healthz
+            pathType: Exact
+            backend:
+              service:
+                name: api
+                port:
+                  number: 3500
+          - path: /ready
+            pathType: Exact
+            backend:
+              service:
+                name: api
+                port:
+                  number: 3500
+          - path: /started
+            pathType: Exact
+            backend:
+              service:
+                name: api
+                port:
+                  number: 3500
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 3000

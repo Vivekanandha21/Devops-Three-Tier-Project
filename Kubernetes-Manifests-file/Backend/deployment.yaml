@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: three-tier
+  labels:
+    role: api
+    env: demo
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      role: api
+  template:
+    metadata:
+      labels:
+        role: api
+    spec:
+      imagePullSecrets:
+      - name: ecr-registry-secret
+      containers:
+      - name: api
+        image: 954976293772.dkr.ecr.ap-south-1.amazonaws.com/backend:1689
+        imagePullPolicy: Always
+        env:
+          - name: MONGO_CONN_STR
+            value: mongodb://mongodb-svc:27017/todo?directConnection=true
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-sec
+                key: username
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongo-sec
+                key: password
+          - name: API_BASE_URL
+            value: "http://k8s-threetie-mainlb-ed983a7756-1936992786.ap-south-1.elb.amazonaws.com"
+        ports:
+        - containerPort: 3500
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3500
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3500
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+        startupProbe:
+          httpGet:
+            path: /started
+            port: 3500
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 30
