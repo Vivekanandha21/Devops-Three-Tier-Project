@@ -18,7 +18,7 @@ pipeline {
         }
        stage('Checkout from Git') {
             steps {
-                git branch: 'main', credentialsId: 'github-token-sceretext', url: 'https://github.com/Bazith1/Three-Tier-Project.git'
+                git branch: 'main', credentialsId: 'github-token-sceretext', url: 'https://github.com/Vivekanandha21/Devops-Three-Tier-Project.git'
             }
         }
         
@@ -82,20 +82,20 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git branch: 'main', credentialsId: 'github-token-sceretext', url: 'https://github.com/Bazith1/Three-Tier-Project.git'
+                git branch: 'main', credentialsId: 'github-token-sceretext', url: 'https://github.com/Vivekanandha21/Devops-Three-Tier-Project.git'
             }
         }
         stage('Update Deployment file') {
             environment {
-                GIT_REPO_NAME = "Three-Tier-Project"
-                GIT_USER_NAME = "Bazith1"
+                GIT_REPO_NAME = "Devops-Three-Tier-Project"
+                GIT_USER_NAME = "Vivekanandha21"
             }
             steps {
                 dir('Kubernetes-Manifests-file/Frontend') {
                     withCredentials([string(credentialsId: 'github-token-sceretext', variable: 'GITHUB_TOKEN')]) {
                         sh '''
-                            git config user.email "mohammedbazith.com@gmail.com"
-                            git config user.name "Bazith1"
+                            git config user.email "vkit21fresher@gmail.com"
+                            git config user.name "Vivekanandha21"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
                             imageTag=$(grep -oP '(?<=frontend:)[^ ]+' deployment.yaml)
