@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Git Pulling') {
             steps {
-                git branch: 'main', url: 'https://github.com/Bazith1/Three-Tier-Project.git' 
+                git branch: 'main', url: 'https://github.com/Vivekanandha21/Devops-Three-Tier-Project.git' 
                 // Clone the specified Git repository and checkout the main branch
             }
         }
