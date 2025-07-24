@@ -1,22 +1,27 @@
 # Data source to fetch the most recent Ubuntu AMI (Amazon Machine Image)
-data "aws_ami" "ami" {
+  data "aws_ami" "ami" {
   most_recent = true  # Fetch the most recent AMI based on the filter criteria
   
   # Filter to get the AMI by name, specifying the Ubuntu version
+ filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
   filter {
-    name   = "name"  # Filter based on the AMI name
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]  # Ubuntu Jammy 22.04 AMIs
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 
   # Only consider AMIs owned by Canonical (Ubuntu's owner account ID)
-  owners = ["767397739074"]  # Canonical's AWS account ID (Ubuntu)
+    owners = ["099720109477"] 
 }
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "Jenkins-key-pair"  # Name of the key pair
-  public_key = file("~/.ssh/id_rsa.pub")  # Path to your public key file
-
+  key_name   = "Jenkins-key-pair"
+  public_key = file("${path.module}/id_rsa.pub")
 }
+
 
 # Resource to launch an EC2 instance
 resource "aws_instance" "ec2" {
