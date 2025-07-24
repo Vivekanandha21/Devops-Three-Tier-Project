@@ -9,7 +9,7 @@ data "aws_ami" "ami" {
   }
 
   # Only consider AMIs owned by Canonical (Ubuntu's owner account ID)
-  owners = ["099720109477"]  # Canonical's AWS account ID (Ubuntu)
+  owners = ["767397739074"]  # Canonical's AWS account ID (Ubuntu)
 }
 
 resource "aws_key_pair" "key_pair" {
