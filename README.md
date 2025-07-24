@@ -1,6 +1,6 @@
 # Advanced DevSecOps Pipeline with Kubernetes, AWS, and GitOps
 
-![Three-Tier Architecture]
+**Three-Tier Architecture**
 
 
 ## Project Introduction
