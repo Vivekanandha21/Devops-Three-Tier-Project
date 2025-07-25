@@ -12,37 +12,30 @@ module "eks" {
   cluster_endpoint_private_access        = true
   enable_cluster_creator_admin_permissions = true
 
-  eks_managed_node_group_defaults = {
-    ami_type       = "AL2_x86_64"
-    instance_types = ["t3.medium"]
-  }
-
-  managed_node_groups = {
+  eks_managed_node_groups = {
     default = {
-      min_size     = 2
-      max_size     = 6
-      desired_size = 2
+      min_size       = 2
+      max_size       = 6
+      desired_size   = 2
+      instance_types = ["t3.medium"]
+      ami_type       = "AL2_x86_64"
     }
   }
 
-  addons = [
-    {
-      name    = "vpc-cni"
-      version = "v1.18.1-eksbuild.1"
-    },
-    {
-      name    = "coredns"
-      version = "v1.11.1-eksbuild.9"
-    },
-    {
-      name    = "kube-proxy"
-      version = "v1.29.3-eksbuild.2"
-    },
-    {
-      name    = "aws-ebs-csi-driver"
-      version = "v1.30.0-eksbuild.1"
+  cluster_addons = {
+    vpc-cni = {
+      addon_version = "v1.18.1-eksbuild.1"
     }
-  ]
+    coredns = {
+      addon_version = "v1.11.1-eksbuild.9"
+    }
+    kube-proxy = {
+      addon_version = "v1.29.3-eksbuild.2"
+    }
+    aws-ebs-csi-driver = {
+      addon_version = "v1.30.0-eksbuild.1"
+    }
+  }
 
   tags = {
     Project     = "three-tier-Project"
