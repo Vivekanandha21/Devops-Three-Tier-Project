@@ -17,10 +17,11 @@ module "eks" {
     instance_types = ["t3.medium"]
   }
 
-  node_group = {
-    min_size     = 2
-    max_size     = 6
-    desired_size = 2
+   managed_node_groups = {
+    default = {
+      min_size     = 2
+      max_size     = 6
+      desired_size = 2
 
     addons = [
       {
