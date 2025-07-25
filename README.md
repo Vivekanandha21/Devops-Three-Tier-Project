@@ -2,7 +2,6 @@
 
 **Three-Tier Architecture**
 
-
 ## Project Introduction
 This is the End-to-End DevSecOps Kubernetes Project. This comprehensive project setting up a robust Three-Tier Architecture on AWS using Kubernetes, DevOps best practices, and advanced security measures.To Gain hands-on experience in deploying, securing, and monitoring a scalable application environment.
 
