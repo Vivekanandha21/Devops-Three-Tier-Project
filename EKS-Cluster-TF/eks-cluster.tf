@@ -17,38 +17,36 @@ module "eks" {
     instance_types = ["t3.medium"]
   }
 
-   managed_node_groups = {
+  managed_node_groups = {
     default = {
       min_size     = 2
       max_size     = 6
       desired_size = 2
+    }
   }
-}
 
-    addons = [
-      {
-        name    = "vpc-cni"
-        version = "v1.18.1-eksbuild.1"
-      },
-      {
-        name    = "coredns"
-        version = "v1.11.1-eksbuild.9"
-      },
-      {
-        name    = "kube-proxy"
-        version = "v1.29.3-eksbuild.2"
-      },
-      {
-        name    = "aws-ebs-csi-driver"
-        version = "v1.30.0-eksbuild.1"
-      }
-    ]
-  }
+  addons = [
+    {
+      name    = "vpc-cni"
+      version = "v1.18.1-eksbuild.1"
+    },
+    {
+      name    = "coredns"
+      version = "v1.11.1-eksbuild.9"
+    },
+    {
+      name    = "kube-proxy"
+      version = "v1.29.3-eksbuild.2"
+    },
+    {
+      name    = "aws-ebs-csi-driver"
+      version = "v1.30.0-eksbuild.1"
+    }
+  ]
 
   tags = {
-    Project     = "three-tier-Project"  # <-- Replace with your desired project name
-    Environment = "dev"              # Optional: dev/test/prod
-    Owner       = "vk"               # Optional: who is managing the infra
+    Project     = "three-tier-Project"
+    Environment = "dev"
+    Owner       = "vk"
   }
 }
-
