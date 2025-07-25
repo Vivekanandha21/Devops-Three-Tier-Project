@@ -22,6 +22,8 @@ module "eks" {
       min_size     = 2
       max_size     = 6
       desired_size = 2
+  }
+}
 
     addons = [
       {
