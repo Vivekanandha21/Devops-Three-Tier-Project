@@ -22,20 +22,25 @@ module "eks" {
     }
   }
 
-  cluster_addons = {
-    vpc-cni = {
-      addon_version = "v1.18.1-eksbuild.1"
-    }
-    coredns = {
-      addon_version = "v1.11.1-eksbuild.9"
-    }
-    kube-proxy = {
-      addon_version = "v1.29.3-eksbuild.2"
-    }
-    aws-ebs-csi-driver = {
-      addon_version = "v1.30.0-eksbuild.1"
-    }
+  cluster_addons = [
+  {
+    name    = "vpc-cni"
+    version = "v1.18.1-eksbuild.1"
+  },
+  {
+    name    = "coredns"
+    version = "v1.11.1-eksbuild.3"
+  },
+  {
+    name    = "kube-proxy"
+    version = "v1.29.1-eksbuild.1" 
+  },
+  {
+    name    = "aws-ebs-csi-driver"
+    version = "v1.30.0-eksbuild.1"
   }
+]
+
 
   tags = {
     Project     = "three-tier-Project"
