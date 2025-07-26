@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: alb  # Use ALB ingress controller
   rules:
-    - host: "www.vktechie.info"  # Allow access through the internal ELB DNS
+    - host: www.vktechie.info  # Allow access through the internal ELB DNS
       http:
         paths:
           - path: /api
