@@ -18,7 +18,7 @@ spec:
     - host: www.vktechie.info
       http:
         paths:
-          - path: /api
+          - path: /api/tasks
             pathType: Prefix
             backend:
               service:
