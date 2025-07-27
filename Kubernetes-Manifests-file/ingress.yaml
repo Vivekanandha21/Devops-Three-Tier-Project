@@ -8,7 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/load-balancer-attributes: "access_logs.s3.enabled=false"
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:767397739074:certificate/4301882a-eb2e-4cbd-a819-23c9a7a66dd1
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:767397739074:certificate/c7a1216c-1162-465d-a105-aaaab387f520
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     argocd.argoproj.io/external-link: https://www.vktechie.info
@@ -53,3 +53,8 @@ spec:
                 name: frontend
                 port:
                   number: 3000
+  tls:
+    - hosts:
+        - www.vktechie.info
+      secretName: dummy-ssl-tls
+
